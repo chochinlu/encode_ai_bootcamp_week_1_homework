@@ -53,6 +53,12 @@ This project uses OpenAI's GPT model to generate responses for various roles, in
 
 4. The AI will generate and display the appropriate response.
 
+## Logging
+
+This application includes a logging feature that records all user inputs and AI responses. The log file is created in the same directory as the application, with the filename format `chat_log_YYYYMMDD.log`, where YYYYMMDD represents the current date.
+
+Each log entry includes a timestamp, followed by either the user's input or the AI's response. This feature allows you to review past conversations and track the AI's performance over time.
+
 ## Environment Variables
 
 This project uses dotenv for environment variable management. Create a `.env` file in the root directory and add the following variables:
