@@ -1,23 +1,28 @@
 from dotenv import load_dotenv
 from openai import OpenAI
-from prompts import CHEF_DESCRIPTION, RECIPE_INSTRUCTIONS
-from utils import system_message, user_message
+import os
+from importlib import import_module
 
 load_dotenv()
+
+prompt_creator = os.getenv('PROMPT_CREATOR', 'sys')
+prompts = import_module(f'prompts.{prompt_creator}')
+from utils import system_message, user_message
+
 
 client = OpenAI()
 
 messages = [
-    system_message(CHEF_DESCRIPTION),
-    system_message(RECIPE_INSTRUCTIONS),
+    system_message(prompts.CHEF_DESCRIPTION),
+    system_message(prompts.RECIPE_INSTRUCTIONS),
 ]
 
-dish = input("請輸入：\n")
+dish = input("Your question：\n")
 messages.append(
-    user_message(dish)
+    user_message(prompts.USER_INSTRUCTIONS.format(dish=dish))
 )
 
-model = "gpt-4o-mini"
+model = os.getenv('MODEL', 'gpt-4o-mini')
 
 stream = client.chat.completions.create(
     model=model,
