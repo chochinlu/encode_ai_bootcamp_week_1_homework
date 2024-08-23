@@ -1,4 +1,4 @@
-# AI Multi-Role Assistant Generator
+# AI Chef
 
 This project uses OpenAI's GPT model to generate responses for various roles, including chef, travel advisor, and programmer.
 
