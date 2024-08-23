@@ -1,6 +1,6 @@
-# AI Chef Recipe Generator
+# AI Multi-Role Assistant Generator
 
-This project uses OpenAI's GPT model to generate detailed recipes based on user input.
+This project uses OpenAI's GPT model to generate responses for various roles, including chef, travel advisor, and programmer.
 
 ## Table of Contents
 
@@ -8,24 +8,21 @@ This project uses OpenAI's GPT model to generate detailed recipes based on user 
 - [Usage](#usage)
 - [Environment Variables](#environment-variables)
 - [Features](#features)
+- [Project Structure](#project-structure)
 - [Contributing](#contributing)
 - [License](#license)
 
 ## Installation
 
 1. Clone the repository:
-   ```
-   git clone https://github.com/yourusername/ai-chef-recipe-generator.git
-   ```
+
 
 2. Navigate to the project directory:
-   ```
-   cd ai-chef-recipe-generator
-   ```
 
-3. Create a virtual environment with Python 3.12:
+
+3. Create a virtual environment:
    ```
-   python3.12 -m venv venv
+   python -m venv venv
    ```
 
 4. Activate the virtual environment:
@@ -52,26 +49,66 @@ This project uses OpenAI's GPT model to generate detailed recipes based on user 
    python app.py
    ```
 
-3. When prompted, enter the name of the dish you want a recipe for.
+3. Enter your question or request when prompted.
 
-4. The AI will generate and display a detailed recipe for the requested dish.
+4. The AI will generate and display the appropriate response.
 
 ## Environment Variables
 
-This project uses dotenv for environment variable management. Create a `.env` file in the root directory and add the following variable:
+This project uses dotenv for environment variable management. Create a `.env` file in the root directory and add the following variables:
 
 ```
 OPENAI_API_KEY=your_openai_api_key_here
+MODEL=gpt-4o-mini
+PROMPT_CREATOR=sys
 ```
 
-Make sure to replace `your_openai_api_key_here` with your actual OpenAI API key.
+Make sure to replace the following:
+- `your_openai_api_key_here`: Replace with your actual OpenAI API key.
+- `gpt-4o-mini`: Can be changed to other supported OpenAI models as needed.
+- `sys`: Can be changed to other appropriate prompt creator identifiers.
 
+
+## Prompt Creators
+
+This project supports multiple prompt creators, which can be selected by changing the `PROMPT_CREATOR` variable in the `.env` file. Currently supported prompt creators include:
+
+- `sys`: The default system prompt creator, providing basic chef role and recipe instructions.
+- `park`: A specially designed Chinese cuisine chef role, skilled in Taiwanese cuisine, offering more friendly and detailed recipe guidance.
+
+Each prompt creator is defined in a corresponding Python file within the `prompts` folder. For example, `sys.py` and `park.py`.
+
+### Prompt Creator File Structure
+
+Each prompt creator file should contain the following variables:
+
+- `CHEF_DESCRIPTION`: Defines the chef's role and characteristics.
+- `RECIPE_INSTRUCTIONS`: Provides specific instructions for recipe responses.
+- `USER_INSTRUCTIONS`: A template for formatting user input.
+
+To use a specific prompt creator, set the `PROMPT_CREATOR` variable in the `.env` file to the corresponding file name (without the `.py` extension). For example:
+
+
+### Variable Descriptions
+
+- `OPENAI_API_KEY`: Your OpenAI API key for accessing OpenAI services.
+- `MODEL`: Specifies the OpenAI model to use. Default is `gpt-4o-mini`, but you can change it according to your needs.
+- `PROMPT_CREATOR`: Used to identify the creator or source of the prompts. Default is `sys` (system).
+
+Note that the `.env` file contains sensitive information and should not be committed to version control.
 ## Features
 
-- Utilizes OpenAI's GPT model to generate recipes
-- Provides detailed recipes and preparation steps for user-requested dishes
-- Handles unknown dish requests gracefully
+- Utilizes OpenAI's GPT model to generate responses
+- Provides detailed answers based on user input
+- Handles unknown requests gracefully
 - Streams the AI's response for a more interactive experience
+
+## Project Structure
+
+- `app.py`: Main application file
+- `prompts/`: Directory containing prompt files for different roles
+- `utils.py`: Contains shared utility functions
+- `requirements.txt`: Lists project dependencies
 
 ## Contributing
 
