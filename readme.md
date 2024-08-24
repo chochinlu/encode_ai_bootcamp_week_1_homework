@@ -1,6 +1,6 @@
 # AI Chef
 
-This project uses OpenAI's GPT model to generate responses for various roles, including chef, travel advisor, and programmer.
+This project utilizes OpenAI's ChatGPT model to simulate various types of chefs, providing users with diverse culinary recipe suggestions.
 
 ## Table of Contents
 
